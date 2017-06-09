@@ -1,6 +1,6 @@
 /**
- * @file    read_uid.h
- * @brief   
+ * @file    wizwiki_w7500.c
+ * @brief   board ID for the WIZnet WIZwiki-W7500 board
  *
  * DAPLink Interface Firmware
  * Copyright (c) 2009-2016, ARM Limited, All Rights Reserved
@@ -19,20 +19,4 @@
  * limitations under the License.
  */
 
-#ifndef READ_UID_H
-#define READ_UID_H
-
-#include "stdint.h"
-
-#ifdef __cplusplus
-}
-#endif
-
-void read_unique_id(uint32_t *id);
-void create_unique_id(void);
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif
+const char *board_id = "2201";

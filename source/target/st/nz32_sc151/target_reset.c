@@ -1,9 +1,9 @@
 /**
- * @file    read_uid.h
- * @brief   
+ * @file    target_reset.c
+ * @brief   Target reset for the stm32l151
  *
  * DAPLink Interface Firmware
- * Copyright (c) 2009-2016, ARM Limited, All Rights Reserved
+ * Copyright (c) 2009-2017, ARM Limited, All Rights Reserved
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -19,20 +19,26 @@
  * limitations under the License.
  */
 
-#ifndef READ_UID_H
-#define READ_UID_H
+#include "target_reset.h"
+#include "swd_host.h"
 
-#include "stdint.h"
-
-#ifdef __cplusplus
+void target_before_init_debug(void)
+{
+    return;
 }
-#endif
 
-void read_unique_id(uint32_t *id);
-void create_unique_id(void);
-
-#ifdef __cplusplus
+uint8_t target_unlock_sequence(void)
+{
+    return 1;
 }
-#endif
 
-#endif
+uint8_t target_set_state(TARGET_RESET_STATE state)
+{
+    return swd_set_target_state_hw(state);
+}
+
+uint8_t security_bits_set(uint32_t addr, uint8_t *data, uint32_t size)
+{
+    return 0;
+}
+

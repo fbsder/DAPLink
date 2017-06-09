@@ -1,9 +1,9 @@
 /**
- * @file    read_uid.h
- * @brief   
+ * @file    target.c
+ * @brief   Target information for the stm32l151
  *
  * DAPLink Interface Firmware
- * Copyright (c) 2009-2016, ARM Limited, All Rights Reserved
+ * Copyright (c) 2009-2017, ARM Limited, All Rights Reserved
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -19,20 +19,18 @@
  * limitations under the License.
  */
 
-#ifndef READ_UID_H
-#define READ_UID_H
+#include "target_config.h"
 
-#include "stdint.h"
+// The file flash_blob.c must only be included in target.c
+#include "flash_blob.c"
 
-#ifdef __cplusplus
-}
-#endif
-
-void read_unique_id(uint32_t *id);
-void create_unique_id(void);
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif
+// target information
+target_cfg_t target_device = {
+    .sector_size    = 256,
+    .sector_cnt     = KB(1),
+    .flash_start    = 0x08000000,
+    .flash_end      = 0x08000000 + KB(256),
+    .ram_start      = 0x20000000,
+    .ram_end        = 0x20000000 + KB(32),
+    .flash_algo     = (program_target_t *) &flash,
+};

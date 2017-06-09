@@ -1,6 +1,6 @@
 /**
- * @file    read_uid.h
- * @brief   
+ * @file    target.c
+ * @brief   Target information for the W7500 
  *
  * DAPLink Interface Firmware
  * Copyright (c) 2009-2016, ARM Limited, All Rights Reserved
@@ -19,20 +19,18 @@
  * limitations under the License.
  */
 
-#ifndef READ_UID_H
-#define READ_UID_H
+#include "target_config.h"
 
-#include "stdint.h"
+// The file flash_blob.c must only be included in target.c
+#include "flash_blob.c"
 
-#ifdef __cplusplus
-}
-#endif
-
-void read_unique_id(uint32_t *id);
-void create_unique_id(void);
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif
+// target information
+target_cfg_t target_device = {
+    .sector_size  = 256,
+    .sector_cnt    = 512,
+    .flash_start    = 0x00000000,
+    .flash_end     = 0x00000000 + KB(128),
+    .ram_start      = 0x20000000,
+    .ram_end        = 0x20004000,
+    .flash_algo     = (program_target_t *) &flash,
+};
